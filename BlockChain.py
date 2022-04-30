@@ -10,8 +10,8 @@ class BlockChain():
 
     def verify_diff_hash(self, block):
         hash = hashlib.sha256()
-        h.update(str(block).encode('utf-8'))
-        return block.h.hexdigest() == h.hexdigest() and int(h.hexdigest(), 16) < 2**(256-self.diff)
+        hash.update(str(block).encode('utf-8'))
+        return block.h.hexdigest() == hash.hexdigest() and int(hash.hexdigest(), 16) < 2**(256-self.diff)
 
     def add_block(self, block):
         if self.verify_diff_hash(block):
@@ -21,9 +21,9 @@ class BlockChain():
         self.data_pool.append(data)
 
     def create_origin_block(self):
-        h = hashlib.sha256()
-        h.update(''.encode('utf-8'))
-        origin = Block("Origin",h)
+        hash = hashlib.sha256()
+        hash.update(''.encode('utf-8'))
+        origin = Block("Origin",hash)
         origin.mine(self.diff)
         self.blocks.append(origin)
 
