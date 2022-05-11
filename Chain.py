@@ -2,16 +2,18 @@ import hashlib
 
 from Clasa_Block import Block
 
+
 class BlockChain():
-    def __init__(self,diff):
+    def __init__(self, diff):
         self.diff = diff
         self.blocks = []
         self.data_pool = []
+        self.create_origin_block()
 
     def verify_diff_hash(self, block):
         hash = hashlib.sha256()
         hash.update(str(block).encode('utf-8'))
-        return block.h.hexdigest() == hash.hexdigest() and int(hash.hexdigest(), 16) < 2**(256-self.diff)
+        return Block.hash.hexdigest() == hash.hexdigest() and int(hash.hexdigest(), 16) < 2 ** (256-self.diff) and Block.previous_hash == self.blocks[-1].hash
 
     def add_block(self, block):
         if self.verify_diff_hash(block):
@@ -23,16 +25,13 @@ class BlockChain():
     def create_origin_block(self):
         hash = hashlib.sha256()
         hash.update(''.encode('utf-8'))
-        origin = Block("Origin",hash)
+        origin = Block("Origin", hash)
         origin.mine(self.diff)
         self.blocks.append(origin)
 
     def mine(self):
-        if len(self.pool):
+        if len(self.data_pool):
             data = self.data_pool.pop()
-            block = Block(data,self.blocks[-1].hash)
+            block = Block(data, self.blocks[-1].hash)
             block.mine(self.diff)
             self.add_block(block)
-
-
-
