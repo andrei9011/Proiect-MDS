@@ -7,6 +7,15 @@ class Block():
         self.nonce = 0
         self.data = data
 
+    def __new__(cls, *args, **kwargs):
+        return super().__new__(cls)
+
+    def get_block(self, block):
+        self.hash = block.hash
+        self.previous_hash = block.previous_hash
+        self.nonce = block.nonce
+        self.data = block.data
+
     def mine(self, difficulty):
         self.hash.update(str(self).encode('utf-8'))
         while int(self.hash.hexdigest(), 16) > 2 ** (256 - difficulty):
