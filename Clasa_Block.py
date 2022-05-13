@@ -9,10 +9,10 @@ class Block():
 
     def mine(self, difficulty):
         self.hash.update(str(self).encode('utf-8'))
-        while int(self.hash.hexdigest(),16) > 2**(256-difficulty):
+        while int(self.hash.hexdigest(), 16) > 2 ** (256 - difficulty):
             self.nonce += 1
             self.hash = hashlib.sha256()
             self.hash.update(str(self).encode('utf-8'))
 
     def __str__(self):
-        return "{}{}".format(self.previous_hash.hexdigest(),self.data, self.nonce)
+        return "{}{}{}".format(self.previous_hash.hexdigest(), self.data, self.nonce)

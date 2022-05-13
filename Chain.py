@@ -13,7 +13,7 @@ class BlockChain():
     def verify_diff_hash(self, block):
         hash = hashlib.sha256()
         hash.update(str(block).encode('utf-8'))
-        return Block.hash.hexdigest() == hash.hexdigest() and int(hash.hexdigest(), 16) < 2 ** (256-self.diff) and Block.previous_hash == self.blocks[-1].hash
+        return block.hash.hexdigest() == hash.hexdigest() and int(hash.hexdigest(), 16) < 2 ** (256-self.diff) and block.previous_hash == self.blocks[-1].hash
 
     def add_block(self, block):
         if self.verify_diff_hash(block):
