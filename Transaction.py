@@ -17,8 +17,8 @@ class Transaction():
             'time' : self.time
         })
 
-    def __str__(self):
+    def print_transaction(self):
         transaction = self.make_dict()
-        return "{}{}{}{}".format("Ammount: ", transaction['ammount'], "\nPayer: ",
-                                 transaction['payer'], "\nPayee: ", transaction['payee'],
+        print(f"Ammount: ", transaction['ammount'], "\nPayer: ",
+              transaction['payer'], "\nPayee: ", transaction['payee'],
                                  "\nTime: ", transaction['time'])

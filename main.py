@@ -20,16 +20,19 @@ alex = Wallet()
 andrei = Wallet()
 ciprian = Wallet()
 
-print(alex.identity)
-print(andrei.identity)
-print(ciprian.identity)
+#print(alex.identity)
+#print(andrei.identity)
+#print(ciprian.identity)
 
-transaction1 = Transaction(20, alex.publicKey, ciprian.identity)
-transaction2 = Transaction(10, andrei.publicKey, ciprian.identity)
-transaction3 = Transaction(5, andrei.publicKey, alex.identity)
+transaction1 = Transaction(20, alex._publickey(), ciprian._publickey())
+transaction2 = Transaction(10, andrei._publickey(), ciprian._publickey())
+transaction3 = Transaction(5, andrei._publickey(), alex._publickey())
 
 signature1 = alex.make_a_payement(5,andrei.identity)
 signature2 = ciprian.make_a_payement(10,andrei.identity)
 signature3 = andrei.make_a_payement(5,alex.identity)
 
-print(signature1, "\n", signature2, "\n", signature3)
+transaction1.print_transaction()
+transaction2.print_transaction()
+transaction3.print_transaction()
+

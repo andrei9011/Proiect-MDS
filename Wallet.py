@@ -25,3 +25,6 @@ class Wallet():
         transaction = Transaction(ammount, self.publicKey, payee_publickey)
         hash = SHA.new(str(transaction.make_dict()).encode('utf-8'))
         return binascii.hexlify(self.signer.sign(hash)).decode('ascii')
+
+    def _publickey(self):
+        return hex(self.publicKey.n)
