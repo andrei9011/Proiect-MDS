@@ -1,0 +1,27 @@
+#pip3 install pycryptodome
+import Crypto.Cipher.PKCS1_v1_5
+from Crypto.PublicKey import RSA
+from Crypto.Hash import SHA
+from Crypto.Signature import PKCS1_v1_5
+import Crypto.Random
+import Crypto
+import binascii
+import hashlib
+from Transaction import Transaction
+
+class Wallet():
+    def __init__(self):
+        self.keyPair = RSA.generate(1024, Crypto.Random.new().read)
+        self.publicKey = self.keyPair.publickey()
+        self.pubKeyPEM = self.publicKey.exportKey()
+        self.privateKey =  self.keyPair.exportKey()
+        self.signer =  PKCS1_v1_5.new(self.keyPair)
+
+    @property
+    def identity(self):
+        return binascii.hexlify(self.pubKeyPEM).decode('ascii')
+
+    def make_a_payement(self, ammount, payee_publickey):
+        transaction = Transaction(ammount, self.publicKey, payee_publickey)
+        hash = SHA.new(str(transaction.make_dict()).encode('utf-8'))
+        return binascii.hexlify(self.signer.sign(hash)).decode('ascii')
