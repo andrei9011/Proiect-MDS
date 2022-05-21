@@ -16,15 +16,13 @@ class Wallet():
         self.pubKeyPEM = self.publicKey.exportKey()
         self.privateKey =  self.keyPair.exportKey()
         self.signer =  PKCS1_v1_5.new(self.keyPair)
+        self.amount = 100 
 
     @property
     def identity(self):
         return binascii.hexlify(self.pubKeyPEM).decode('ascii')
 
-    def make_a_payement(self, ammount, payee_publickey):
-        transaction = Transaction(ammount, self.publicKey, payee_publickey)
-        hash = SHA.new(str(transaction.make_dict()).encode('utf-8'))
-        return binascii.hexlify(self.signer.sign(hash)).decode('ascii')
+
 
     def _publickey(self):
         return hex(self.publicKey.n)

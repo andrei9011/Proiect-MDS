@@ -6,6 +6,8 @@ class Block():
         self.previous_hash = previous_hash
         self.nonce = 0
         self.data = data
+        self.transactionList = []
+        self.transactionCount = 0
 
     def __new__(cls, *args, **kwargs): #creare de obiect nou fara atribuire de date
         return super().__new__(cls)
