@@ -1,4 +1,4 @@
-#pip3 install pycryptodome
+ #pip3 install pycryptodome
 import Crypto.Cipher.PKCS1_v1_5
 from Crypto.PublicKey import RSA
 from Crypto.Hash import SHA
@@ -16,13 +16,15 @@ class Wallet():
         self.pubKeyPEM = self.publicKey.exportKey()
         self.privateKey =  self.keyPair.exportKey()
         self.signer =  PKCS1_v1_5.new(self.keyPair)
-        self.amount = 100 
+        self.amount = 100
 
     @property
     def identity(self):
         return binascii.hexlify(self.pubKeyPEM).decode('ascii')
 
-
-
     def _publickey(self):
         return hex(self.publicKey.n)
+
+    def print_wallet(self):
+        return ("Amount: " + str(self.amount) + "\n" + "Identity: " + self.identity[240:290])
+        
