@@ -37,7 +37,7 @@ andrei = Wallet()
 ciprian = Wallet()
 
 walletDictionary = {'andrei' : 0, 'alex' : 1, 'ciprian' : 2}
-walletList = [alex, andrei, ciprian]
+walletList = [andrei, alex, ciprian]
 
 def adaugaTranzactie():
     payer = clicked1.get()
@@ -56,33 +56,42 @@ def afiseazaWalleturi():
     label3.grid(row = 7, column = 1)
 
 def afisareBlockChain():
-    label1 = Label(root, text = blockchain.blocks)
+    index = int(textField2.get())
+    labelGol = Label(root, text = blockchain.blocks[index])
+    labelGol.grid(row = 9, column = 1)
 
-    label1.grid(row = 9, column = 1)
-
-
+def clearLabel():
+    labelGol.destroy()
+    
 
 root = Tk()
 root.title('Blockchain MDS')
 
+labelGol = Label(root, text = " ")
+
 textField = Entry(root)
 textField.grid(row = 0, column = 2)
+
+textField2 = Entry(root)
+textField2.grid(row = 8, column = 2)
 
 clicked1 = StringVar()
 clicked2 = StringVar()
 clicked1.set("Alege wallet din care se face plata")
 clicked2.set("Alege wallet in care se face plata")
 
-drop = OptionMenu(root, clicked1, "andrei", "ciprian", "alex")
-drop2 = OptionMenu(root, clicked2, "andrei", "ciprian", "alex")
+drop = OptionMenu(root, clicked1, "andrei", "alex", "ciprian")
+drop2 = OptionMenu(root, clicked2, "andrei", "alex", "ciprian")
 drop.grid(row = 0, column = 0)
 drop2.grid(row = 0, column = 1)
 
 button = Button(root, text = "Efectuati plata", command = adaugaTranzactie)
 button2 = Button(root, text = "Afisati walleturi", command = afiseazaWalleturi)
 button3 = Button(root, text = "Afisati blockchain", command = afisareBlockChain)
+button4 = Button(root, text = "Clear", command = clearLabel())
 button.grid(row = 2, column = 1)
 button2.grid(row = 4, column = 1)
 button3.grid(row = 8, column = 1)
+button4.grid(row = 10, column = 1)
 
 root.mainloop()

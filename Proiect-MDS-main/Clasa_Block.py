@@ -26,4 +26,4 @@ class Block():
             self.hash.update(str(self).encode('utf-8'))
 
     def __str__(self): # metoda de printare pentru un block
-        return "{}{}{}".format(self.previous_hash.hexdigest(), self.data, self.nonce)
+        return "previous hash: {}\ndata: {}\nnonce: {}".format(self.previous_hash.hexdigest(), self.data, self.nonce)
