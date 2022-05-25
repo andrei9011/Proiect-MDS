@@ -20,7 +20,7 @@ def addTransaction(blockchain, amount, payer, payee):# tranzactia va fi adaugata
     nr = len(blockchain.blocks)
     # print(nr)
     if (blockchain.blocks[nr-1].transactionCount == 3 or nr == 1):
-        blockchain.add_pool_of_data('S-au minat 100 de peepeecoin \n')
+        blockchain.add_pool_of_data('S-au minat 100 de bitcoin (am vrea noi) \n')
         blockchain.mine()
         bloc = Block('', blockchain.blocks[nr-1].hash)
         blockchain.add_block(bloc)
@@ -75,7 +75,7 @@ root.title('Blockchain MDS')
 #label folosit pentru a putea arata blockchain-ul
 labelGol = Label(root)
 
-#textField este un textfield pentru suma tranzactiei
+#textField este un textfield pentru suma tranzactiei5
 textField = Entry(root)
 textField.grid(row = 0, column = 2)
 
